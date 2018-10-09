@@ -1,5 +1,5 @@
 # GCP Marketplace GraphQL Server
----
+
 ## Models
 
 - User
