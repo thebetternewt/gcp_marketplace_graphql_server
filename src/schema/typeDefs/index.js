@@ -11,4 +11,10 @@ const base = gql`
   }
 `;
 
-module.exports = [base, require('./user')];
+module.exports = [
+  base,
+  require('./user'),
+  require('./profile'),
+  require('./skill'),
+  require('./contribution'),
+];

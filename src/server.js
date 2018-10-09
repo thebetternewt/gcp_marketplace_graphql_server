@@ -1,6 +1,7 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
+// const faker = require('faker');
 const { ApolloServer } = require('apollo-server');
 const { typeDefs, resolvers } = require('./schema');
 const { User } = require('./models');
@@ -24,6 +25,23 @@ mongoose
       resolvers,
       playground,
       cors: true,
+      // mocks: {
+      //   User: () => ({
+      //     name: faker.name.findName(),
+      //     email: faker.internet.email(),
+      //     updatedAt: faker.date.past(),
+      //   }),
+      //   Profile: () => ({
+      //     handle: faker.internet.userName(),
+      //     bio: faker.lorem.paragraph(),
+      //     website: faker.internet.url(),
+      //     location: `${faker.address.city()}, ${faker.address.stateAbbr()}`,
+      //     updatedAt: faker.date.past(),
+      //   }),
+      //   Skill: () => ({
+      //     name: faker.name.jobType(),
+      //   }),
+      // },
       context: async ({ req }) => {
         // get the user token from the headers
         const authorization = req.headers.authorization || '';

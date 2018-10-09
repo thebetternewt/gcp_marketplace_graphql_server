@@ -2,35 +2,40 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const gravatar = require('gravatar');
-const { User } = require('../../models');
+const { User, Profile } = require('../../models');
+const verifyUser = require('../../util/verifyUser');
 
 module.exports = {
+  User: {
+    profile: parent => Profile.findOne({ user: parent.id }).exec(),
+  },
   Query: {
     me: async (parent, args, { user }) => {
-      if (!user) {
-        throw new Error('You are not authenticated!');
-      }
+      verifyUser({ user });
 
       // user is authenticated
-      return User.findOne({ _id: user.id }).exec();
+      return User.findById(user.id);
     },
     user: async (parent, { id }, { user }) => {
-      if (!user.id === id && !user.admin) {
-        throw new Error('Not authorized');
-      }
-      return User.findOne({ id }).exec();
+      verifyUser({
+        user,
+        testUserId: id,
+        current: true,
+        admin: true,
+      });
+      return User.findById(id);
     },
-    users: async (parent, args, { user }) => {
-      if (!user.admin) {
-        throw new Error('Not authorized');
-      }
-      return User.find().exec();
+    users: async (parent, { limit }, { user }) => {
+      verifyUser({ user, admin: true });
+      return User.find()
+        .limit(limit || 10)
+        .exec();
     },
   },
 
   Mutation: {
     signup: async (parent, { name, email, password }) => {
-      // Check for user with that email address.
+      // Check for user with given email address.
       const user = await User.findOne({ email }).exec();
       if (user) {
         throw new Error('User already exists.');
@@ -77,9 +82,7 @@ module.exports = {
     updateUser: async (parent, args, { user }) => {
       const { id, admin, password, email, ...updatedProperties } = args;
 
-      if (!user || (!user.id === id && !user.admin)) {
-        throw new Error('Not authorized');
-      }
+      verifyUser({ user, testUserId: id, current: true, admin: true });
 
       // Only allow update of admin if current user is admin and
       // only update admin if specified args
@@ -123,10 +126,9 @@ module.exports = {
 
       return updatedUser;
     },
-    removeUser: async (parent, { id }, { user }) => {
-      if (!user.id === id && !user.admin) {
-        throw new Error('Not authorized');
-      }
+    deleteUser: async (parent, { id }, { user }) => {
+      verifyUser({ user, testUserId: id, current: true, admin: true });
+
       const removedUser = await User.findOneAndRemove({ _id: id }).exec();
 
       if (!removedUser) {
