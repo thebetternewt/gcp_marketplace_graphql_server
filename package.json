@@ -1,0 +1,31 @@
+{
+  "name": "gcp_marketplace_graphql_server",
+  "version": "1.0.0",
+  "description": "A graphQL server (Apollo Server) for the Garden City Marketplace social network",
+  "main": "index.js",
+  "scripts": {
+    "server": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.1.0",
+    "bcrypt": "^3.0.1",
+    "dotenv": "^6.1.0",
+    "graphql": "^14.0.2",
+    "gravatar": "^1.6.0",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.3.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-prettier": "^2.7.0",
+    "nodemon": "^1.18.3",
+    "prettier": "^1.14.3"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "extends": [
+    "airbnb-base",
+    "prettier"
+  ],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "es5",
+        "singleQuote": true
+      }
+    ],
+    "indent": [
+      "error",
+      2
+    ],
+    "radix": 0,
+    "quotes": [
+      2,
+      "single"
+    ],
+    "no-use-before-define": "off"
+  },
+  "plugins": [
+    "prettier"
+  ]
+}
