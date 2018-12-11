@@ -8,9 +8,10 @@ module.exports = gql`
     link: String
     photoUrl: String
     gcp: Boolean
-    user: User
+    owner: User
     createdAt: String
     updatedAt: String
+    taggedUsers: [User!]!
   }
 
   extend type Query {

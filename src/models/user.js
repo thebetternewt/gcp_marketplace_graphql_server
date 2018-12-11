@@ -22,6 +22,7 @@ module.exports = mongoose.model(
       },
       avatar: {
         type: String,
+        default: null,
       },
       admin: {
         type: Boolean,

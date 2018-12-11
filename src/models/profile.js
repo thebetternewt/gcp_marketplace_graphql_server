@@ -6,11 +6,11 @@ module.exports = mongoose.model(
   'Profile',
   new Schema(
     {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true,
-      },
+      // user: {
+      //   type: Schema.Types.ObjectId,
+      //   ref: 'User',
+      //   required: true,
+      // },
       handle: {
         type: String,
         required: true,
@@ -29,6 +29,16 @@ module.exports = mongoose.model(
       },
       location: {
         type: String,
+      },
+      email: {
+        type: String,
+      },
+      name: {
+        type: String,
+      },
+      avatar: {
+        type: String,
+        default: null,
       },
       socialLinks: {
         type: [

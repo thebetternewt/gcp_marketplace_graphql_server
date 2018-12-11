@@ -4,12 +4,14 @@ module.exports = gql`
   type Profile {
     id: ID!
     handle: String!
+    email: String!
+    name: String!
     bio: String
     skills: [Skill]
     website: String
     location: String
+    avatar: String
     socialLinks: [SocialLink!]!
-    user: User
     createdAt: String
     updatedAt: String
   }

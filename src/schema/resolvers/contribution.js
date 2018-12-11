@@ -3,7 +3,7 @@ const verifyUser = require('../../util/verifyUser');
 
 module.exports = {
   Contribution: {
-    user: parent => User.findById(parent.user).exec(),
+    owner: parent => User.findById(parent.user).exec(),
   },
   Query: {
     contribution: (parent, { id }) => Contribution.findById(id).exec(),

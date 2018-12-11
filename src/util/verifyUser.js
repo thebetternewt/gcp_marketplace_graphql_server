@@ -5,11 +5,6 @@ const verifyUser = ({
   current = false,
   admin = false,
 } = {}) => {
-  // console.log('currentUser: ', user);
-  // console.log('testUserId: ', testUserId);
-  // console.log('current: ', current);
-  // console.log('admin: ', admin);
-  // console.log('verifying user...');
   let valid = false;
 
   if (current) {

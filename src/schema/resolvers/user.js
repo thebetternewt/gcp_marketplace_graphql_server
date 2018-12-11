@@ -1,6 +1,6 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const gravatar = require('gravatar');
 const { User, Profile } = require('../../models');
 const verifyUser = require('../../util/verifyUser');
@@ -56,7 +56,9 @@ module.exports = {
         password: hashedPass,
       });
 
-      return newUser.save();
+      await newUser.save();
+
+      return newUser;
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({
@@ -89,6 +91,8 @@ module.exports = {
       if (user.admin && admin !== undefined) {
         updatedProperties.admin = admin;
       }
+
+      console.log('verify user passed');
 
       if (email) {
         // Check for user with that email address.

@@ -4,7 +4,7 @@ const validateHandle = require('../../util/validateHandle');
 
 module.exports = {
   Profile: {
-    user: parent => User.findById(parent.user),
+    // user: parent => User.findById(parent.user),
     skills: parent => Skill.where({ _id: { $in: parent.skills } }),
   },
 
@@ -39,7 +39,9 @@ module.exports = {
       validateHandle(args.handle);
 
       const newProfile = new Profile({
-        user: user.id,
+        email: user.email,
+        name: user.name,
+        avatar: user.avatar,
         ...args,
       });
 
@@ -60,7 +62,12 @@ module.exports = {
         admin: true,
       });
 
-      profile.set({ ...updatedProperties });
+      profile.set({
+        email: user.email,
+        name: user.name,
+        avatar: user.avatar,
+        ...updatedProperties,
+      });
       const updatedProfile = await profile.save();
 
       if (!updatedProfile) {
