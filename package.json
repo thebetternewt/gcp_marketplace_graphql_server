@@ -4,6 +4,7 @@
   "description": "A graphQL server (Apollo Server) for the Garden City Marketplace social network",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "server": "node index.js",
     "dev": "nodemon index.js"
   },
