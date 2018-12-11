@@ -15,11 +15,13 @@ mongoose
     { useNewUrlParser: true }
   )
   .then(() => {
-    const playground = {
-      settings: {
-        'editor.cursorShape': 'block',
-      },
-    };
+    const playground = IN_PROD
+      ? false
+      : {
+          settings: {
+            'editor.cursorShape': 'block',
+          },
+        };
 
     const corsOptions = {
       origin: process.env.CORS_ALLOWED_ORIGIN,
