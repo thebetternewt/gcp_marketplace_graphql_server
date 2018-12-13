@@ -35,7 +35,7 @@ module.exports = gql`
   extend type Mutation {
     createProfile(
       handle: String!
-      bio: String
+      bio: String!
       skills: [String!]
       website: String
       location: String

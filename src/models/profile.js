@@ -19,6 +19,7 @@ module.exports = mongoose.model(
       },
       bio: {
         type: String,
+        required: true,
         max: 500,
       },
       skills: {
